@@ -13,10 +13,10 @@ import { InsuranceModel } from '../../../../core/models/insurance.model';
 })
 export class InsuranceListComponent {
   private readonly itemsSignal = signal<InsuranceModel[]>([
-    { id: 1, categoriaId: 1, codigo: 'VIDA', nombre: 'Seguro de Vida', descripcion: 'Cobertura integral de vida', activo: true },
-    { id: 2, categoriaId: 2, codigo: 'AUTO', nombre: 'Seguro Automotriz', descripcion: 'Protección vehicular', activo: true },
-    { id: 3, categoriaId: 3, codigo: 'SALUD', nombre: 'Seguro de Salud', descripcion: 'Atención médica', activo: false },
-    { id: 4, categoriaId: 4, codigo: 'HOGAR', nombre: 'Seguro de Hogar', descripcion: 'Protección del inmueble', activo: true }
+    { id: 1, categoriaId: 1, codigo: 'VIDA', nombre: 'Seguro de Vida', descripcion: 'Cobertura integral de vida', activo: true, usuarioCreoId: 1, usuarioActualizoId: 1 },
+    { id: 2, categoriaId: 2, codigo: 'AUTO', nombre: 'Seguro Automotriz', descripcion: 'Protección vehicular', activo: true, usuarioCreoId: 1, usuarioActualizoId: 2 },
+    { id: 3, categoriaId: 3, codigo: 'SALUD', nombre: 'Seguro de Salud', descripcion: 'Atención médica', activo: false, usuarioCreoId: 2, usuarioActualizoId: 2 },
+    { id: 4, categoriaId: 4, codigo: 'HOGAR', nombre: 'Seguro de Hogar', descripcion: 'Protección del inmueble', activo: true, usuarioCreoId: 1, usuarioActualizoId: 3 }
   ]);
 
   readonly page = signal(1);

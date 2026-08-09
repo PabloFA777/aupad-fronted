@@ -7,4 +7,6 @@ export interface InsuranceModel {
   activo: boolean;
   creadoEn?: string;
   actualizadoEn?: string;
+  usuarioCreoId?: number | null;
+  usuarioActualizoId?: number | null;
 }

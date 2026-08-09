@@ -29,6 +29,14 @@
         <label class="form-label">Descripción</label>
         <textarea class="form-control" rows="3" [(ngModel)]="form.descripcion" name="descripcion" required></textarea>
       </div>
+      <div class="col-md-6">
+        <label class="form-label">Usuario que creó</label>
+        <input class="form-control" type="number" [(ngModel)]="form.usuarioCreoId" name="usuarioCreoId" />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Usuario que actualizó</label>
+        <input class="form-control" type="number" [(ngModel)]="form.usuarioActualizoId" name="usuarioActualizoId" />
+      </div>
 
       <div class="col-12 d-flex justify-content-end gap-2">
         <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancelar</button>

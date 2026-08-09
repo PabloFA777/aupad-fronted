@@ -22,11 +22,13 @@ export class InsuranceFormComponent {
     codigo: '',
     nombre: '',
     descripcion: '',
-    activo: true
+    activo: true,
+    usuarioCreoId: null,
+    usuarioActualizoId: null
   };
 
   ngOnChanges() {
-    this.form = this.item ? { ...this.item } : { id: 0, categoriaId: 0, codigo: '', nombre: '', descripcion: '', activo: true };
+    this.form = this.item ? { ...this.item } : { id: 0, categoriaId: 0, codigo: '', nombre: '', descripcion: '', activo: true, usuarioCreoId: null, usuarioActualizoId: null };
   }
 
   save() {
