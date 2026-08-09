@@ -9,7 +9,11 @@
 
   <aside class="sidebar" [class.is-open]="isSidebarOpen()">
     <div class="brand">
-      <div class="brand-mark">BO</div>
+      <div class="brand-media">
+        <img class="brand-logo brand-logo--light" src="/assets/logo-light.png" alt="Logo de la empresa" (load)="onLogoLoad($event)" (error)="onLogoError($event)" />
+        <img class="brand-logo brand-logo--dark" src="/assets/logo-dark.png" alt="Logo de la empresa" (load)="onLogoLoad($event)" (error)="onLogoError($event)" />
+        <div class="brand-mark">BO</div>
+      </div>
       <div>
         <h2>Back Office</h2>
         <p>Dashboard administrativo</p>

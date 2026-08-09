@@ -13,6 +13,18 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 export class DashboardShellComponent {
   readonly isSidebarOpen = signal(false);
 
+  onLogoLoad(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.classList.add('loaded');
+    target.classList.remove('error');
+  }
+
+  onLogoError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.classList.add('error');
+    target.classList.remove('loaded');
+  }
+
   readonly maintenanceItems = [
     { label: 'Usuarios', path: '/maintenance/users' },
     { label: 'Roles', path: '/maintenance/roles' },

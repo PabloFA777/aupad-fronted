@@ -1,0 +1,63 @@
+.app-shell {
+  min-height: 100vh;
+  background: #f4f7fb;
+  color: #233142;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.app-shell.dark-theme {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1200;
+  border: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #10233f;
+  color: white;
+  box-shadow: 0 8px 18px rgba(16, 35, 63, 0.2);
+}
+
+.app-shell.dark-theme .theme-toggle {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.app-shell.dark-theme .sidebar {
+  background: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+}
+
+.app-shell.dark-theme .summary-card,
+.app-shell.dark-theme .main-panel,
+.app-shell.dark-theme .table-wrap,
+.app-shell.dark-theme .modal-card,
+.app-shell.dark-theme .form-shell {
+  background: #111827;
+  color: #e2e8f0;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.35);
+}
+
+.app-shell.dark-theme .table {
+  color: #e2e8f0;
+}
+
+.app-shell.dark-theme .form-control,
+.app-shell.dark-theme .form-select,
+.app-shell.dark-theme input,
+.app-shell.dark-theme select,
+.app-shell.dark-theme textarea {
+  background: #1f2937;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+.app-shell.dark-theme .topbar-badge {
+  background: #1e293b;
+  color: #93c5fd;
+}
