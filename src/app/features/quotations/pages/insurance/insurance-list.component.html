@@ -1,0 +1,68 @@
+<div class="card-list">
+  <div class="card-list__header">
+    <div>
+      <h3>Seguros</h3>
+      <p>Gestión de seguros para cotización y contratación.</p>
+    </div>
+    <button class="btn btn-primary" (click)="openModal()" title="Agregar">
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </div>
+
+  <div class="table-wrap">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Categoría</th>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th class="text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of paginatedItems(); track item.id) {
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.categoriaId }}</td>
+            <td>{{ item.codigo }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.descripcion }}</td>
+            <td>
+              <span class="badge" [ngClass]="item.activo ? 'bg-success' : 'bg-secondary'">
+                {{ item.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td class="text-end">
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(item)" title="Editar">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger" (click)="remove(item.id)" title="Eliminar">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-row">
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === 1" (click)="prevPage()" title="Anterior">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <span>Página {{ page() }} de {{ totalPages() }}</span>
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === totalPages()" (click)="nextPage()" title="Siguiente">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+<app-insurance-form
+  *ngIf="isModalOpen()"
+  [item]="selectedItem()"
+  (saved)="onSaved($event)"
+  (closed)="closeModal()"
+></app-insurance-form>
