@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { UsersFormComponent } from './users-form.component';
+import { UsuariosFormComponent } from './usuarios-form.component';
 import { UserModel } from '../../../../core/models/user.model';
 
 @Component({
-  selector: 'app-users-list',
+  selector: 'app-usuarios-list',
   standalone: true,
-  imports: [CommonModule, UsersFormComponent],
-  templateUrl: './users-list.component.html',
-  styleUrl: './users-list.component.css',
+  imports: [CommonModule, UsuariosFormComponent],
+  templateUrl: './usuarios-list.component.html',
+  styleUrl: './usuarios-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UsersListComponent {
+export class UsuariosListComponent {
   private readonly itemsSignal = signal<UserModel[]>([
     { id: 1, rolId: 1, nombre: 'Carlos', apellido: 'Pérez', correo: 'carlos@aupad.com', estado: 'activo', ingresoConfirmado: true, requiereCambioPassword: false },
     { id: 2, rolId: 2, nombre: 'Ana', apellido: 'García', correo: 'ana@aupad.com', estado: 'inactivo', ingresoConfirmado: false, requiereCambioPassword: true }
