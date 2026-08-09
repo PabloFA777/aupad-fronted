@@ -1,5 +1,13 @@
 <div class="dashboard-shell">
-  <aside class="sidebar">
+  @if (isSidebarOpen()) {
+    <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+  }
+
+  <button class="sidebar-toggle" type="button" (click)="toggleSidebar()" aria-label="Alternar menú">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <aside class="sidebar" [class.is-open]="isSidebarOpen()">
     <div class="brand">
       <div class="brand-mark">BO</div>
       <div>
@@ -11,7 +19,7 @@
     <nav class="nav-section" aria-label="Mantenimiento">
       <div class="nav-title">Mantenimiento</div>
       @for (item of maintenanceItems; track item.path) {
-        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="closeSidebar()">
           <span class="dot dot-blue"></span>
           {{ item.label }}
         </a>
@@ -21,7 +29,7 @@
     <nav class="nav-section" aria-label="Cotización de Seguros">
       <div class="nav-title">Cotización de Seguros</div>
       @for (item of quotationItems; track item.path) {
-        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="closeSidebar()">
           <span class="dot dot-green"></span>
           {{ item.label }}
         </a>
@@ -31,7 +39,7 @@
     <nav class="nav-section" aria-label="Configuración">
       <div class="nav-title">Configuración</div>
       @for (item of settingsItems; track item.path) {
-        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" (click)="closeSidebar()">
           <span class="dot dot-gray"></span>
           {{ item.label }}
         </a>

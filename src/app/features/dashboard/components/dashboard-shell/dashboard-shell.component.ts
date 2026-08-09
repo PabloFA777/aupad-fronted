@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -11,6 +11,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardShellComponent {
+  readonly isSidebarOpen = signal(false);
+
   readonly maintenanceItems = [
     { label: 'Usuarios', path: '/maintenance/users' },
     { label: 'Roles', path: '/maintenance/roles' },
@@ -28,4 +30,12 @@ export class DashboardShellComponent {
   readonly settingsItems = [
     { label: 'Configuración', path: '/settings/system-config' }
   ];
+
+  toggleSidebar() {
+    this.isSidebarOpen.update(value => !value);
+  }
+
+  closeSidebar() {
+    this.isSidebarOpen.set(false);
+  }
 }

@@ -1,7 +1,9 @@
 <div class="form-shell">
   <div class="form-shell__header">
     <h4>{{ item ? 'Editar configuración' : 'Nueva configuración' }}</h4>
-    <button type="button" class="btn-close" (click)="close()">×</button>
+    <button type="button" class="btn-close" (click)="close()" title="Cerrar">
+      <i class="bi bi-x-lg"></i>
+    </button>
   </div>
 
   <form class="form-grid" (ngSubmit)="save()">
