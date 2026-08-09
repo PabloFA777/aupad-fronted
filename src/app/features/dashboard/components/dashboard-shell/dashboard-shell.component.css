@@ -74,6 +74,14 @@
   display: none;
 }
 
+.app-shell.dark-theme .brand-logo {
+  filter: brightness(0) invert(1);
+}
+
+.app-shell:not(.dark-theme) .brand-logo {
+  filter: none;
+}
+
 .brand-mark {
   width: 48px;
   height: 48px;
@@ -85,21 +93,6 @@
   font-size: 1rem;
 }
 
-.app-shell.dark-theme .brand-logo--light {
-  display: none;
-}
-
-.app-shell.dark-theme .brand-logo--dark {
-  display: block;
-}
-
-.app-shell:not(.dark-theme) .brand-logo--dark {
-  display: none;
-}
-
-.app-shell:not(.dark-theme) .brand-logo--light {
-  display: block;
-}
 
 .brand h2 {
   margin: 0;

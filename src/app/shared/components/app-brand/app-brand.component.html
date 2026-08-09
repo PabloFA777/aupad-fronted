@@ -1,0 +1,9 @@
+<div class="brand" [class.brand--compact]="compact">
+  <div class="brand-media">
+    <img class="brand-logo" src="/LOGO%20AUPAD%20NEGRO.png" alt="Logo de la empresa" />
+  </div>
+  <div class="brand-copy" *ngIf="!compact">
+    <h2>{{ title }}</h2>
+    <p>{{ subtitle }}</p>
+  </div>
+</div>
