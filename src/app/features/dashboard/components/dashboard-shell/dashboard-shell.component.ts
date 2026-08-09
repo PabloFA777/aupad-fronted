@@ -17,7 +17,6 @@ export class DashboardShellComponent {
   private readonly router = inject(Router);
 
   readonly isSidebarOpen = signal(false);
-  readonly isDarkMode = signal(false);
 
   onLogoLoad(event: Event) {
     const target = event.target as HTMLImageElement;
@@ -55,13 +54,6 @@ export class DashboardShellComponent {
 
   closeSidebar() {
     this.isSidebarOpen.set(false);
-  }
-
-  toggleTheme() {
-    this.isDarkMode.update(value => !value);
-    document.documentElement.classList.toggle('dark-theme', this.isDarkMode());
-    document.body.classList.toggle('dark-theme', this.isDarkMode());
-    localStorage.setItem('aupad-theme', this.isDarkMode() ? 'dark' : 'light');
   }
 
   logout() {
