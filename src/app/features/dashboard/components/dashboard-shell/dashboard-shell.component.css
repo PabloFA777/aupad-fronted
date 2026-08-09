@@ -23,6 +23,10 @@ body.dark-theme {
   color: #e2e8f0;
 }
 
+.dashboard-shell.dark-theme .content {
+  background: #020617;
+}
+
 .sidebar-overlay {
   display: none;
   position: fixed;
@@ -210,11 +214,21 @@ body.dark-theme {
   color: white;
   display: inline-grid;
   place-items: center;
+  cursor: pointer;
+}
+
+.logout-action {
+  background: #d14343;
 }
 
 .dashboard-shell.dark-theme .theme-action-btn {
   background: #f8fafc;
   color: #0f172a;
+}
+
+.dashboard-shell.dark-theme .logout-action {
+  background: #ef4444;
+  color: white;
 }
 
 .dashboard-shell.dark-theme .topbar-badge {

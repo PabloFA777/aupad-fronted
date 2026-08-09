@@ -52,9 +52,9 @@
       <div class="topbar-actions">
         <div class="topbar-badge">Operación activa</div>
         <button class="theme-action-btn" type="button" (click)="toggleTheme()" title="Cambiar tema">
-          <i class="bi bi-moon-stars"></i>
+          <i class="bi" [class.bi-moon-stars]="!isDarkMode()" [class.bi-sun]="isDarkMode()"></i>
         </button>
-        <button class="theme-action-btn" type="button" (click)="logout()" title="Cerrar sesión">
+        <button class="theme-action-btn logout-action" type="button" (click)="logout()" title="Cerrar sesión">
           <i class="bi bi-box-arrow-right"></i>
         </button>
       </div>
