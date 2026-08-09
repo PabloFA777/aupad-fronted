@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex-shrink: 0;
 }
 
 .brand {
@@ -168,5 +169,29 @@
 
   .summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 16px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .topbar h1 {
+    font-size: 1.3rem;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-panel {
+    padding: 14px;
   }
 }
