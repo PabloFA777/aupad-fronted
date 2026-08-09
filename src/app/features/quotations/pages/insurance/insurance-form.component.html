@@ -39,8 +39,12 @@
       </div>
 
       <div class="col-12 d-flex justify-content-end gap-2">
-        <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="close()" title="Cancelar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+        <button type="submit" class="btn btn-primary" title="Guardar">
+          <i class="bi bi-check-lg"></i>
+        </button>
       </div>
     </form>
   </div>

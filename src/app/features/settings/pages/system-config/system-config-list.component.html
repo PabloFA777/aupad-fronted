@@ -4,7 +4,9 @@
       <h3>Configuración del Sistema</h3>
       <p>Parámetros generales de la aplicación.</p>
     </div>
-    <button class="btn btn-primary" (click)="openModal()">+ Nuevo</button>
+    <button class="btn btn-primary" (click)="openModal()" title="Agregar">
+      <i class="bi bi-plus-lg"></i>
+    </button>
   </div>
 
   <div class="table-wrap">
@@ -26,8 +28,12 @@
             <td>{{ config.valor }}</td>
             <td>{{ config.descripcion }}</td>
             <td class="text-end">
-              <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(config)">Editar</button>
-              <button class="btn btn-sm btn-outline-danger" (click)="remove(config.id)">Eliminar</button>
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(config)" title="Editar">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn btn-sm btn-outline-danger" (click)="remove(config.id)" title="Eliminar">
+                <i class="bi bi-trash"></i>
+              </button>
             </td>
           </tr>
         }
@@ -36,9 +42,13 @@
   </div>
 
   <div class="pagination-row">
-    <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === 1" (click)="prevPage()">Anterior</button>
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === 1" (click)="prevPage()" title="Anterior">
+      <i class="bi bi-chevron-left"></i>
+    </button>
     <span>Página {{ page() }} de {{ totalPages() }}</span>
-    <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === totalPages()" (click)="nextPage()">Siguiente</button>
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === totalPages()" (click)="nextPage()" title="Siguiente">
+      <i class="bi bi-chevron-right"></i>
+    </button>
   </div>
 </div>
 
