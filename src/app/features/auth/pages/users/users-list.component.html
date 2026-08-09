@@ -1,0 +1,33 @@
+<div class="card-list">
+  <div class="card-list__header">
+    <div>
+      <h3>Usuarios</h3>
+      <p>Gestión de usuarios del sistema.</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users(); track user.id) {
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.nombre }}</td>
+            <td>{{ user.apellido }}</td>
+            <td>{{ user.correo }}</td>
+            <td>{{ user.estado }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

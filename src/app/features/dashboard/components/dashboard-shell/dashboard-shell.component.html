@@ -27,6 +27,16 @@
         </a>
       }
     </nav>
+
+    <nav class="nav-section" aria-label="Configuración">
+      <div class="nav-title">Configuración</div>
+      @for (item of settingsItems; track item.path) {
+        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+          <span class="dot dot-gray"></span>
+          {{ item.label }}
+        </a>
+      }
+    </nav>
   </aside>
 
   <main class="content">

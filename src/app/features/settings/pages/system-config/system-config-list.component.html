@@ -1,0 +1,31 @@
+<div class="card-list">
+  <div class="card-list__header">
+    <div>
+      <h3>Configuración del Sistema</h3>
+      <p>Parámetros generales de la aplicación.</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Clave</th>
+          <th>Valor</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (config of configs(); track config.id) {
+          <tr>
+            <td>{{ config.id }}</td>
+            <td>{{ config.clave }}</td>
+            <td>{{ config.valor }}</td>
+            <td>{{ config.descripcion }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

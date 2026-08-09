@@ -13,6 +13,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 export class DashboardShellComponent {
   readonly maintenanceItems = [
     { label: 'Usuarios', path: '/maintenance/users' },
+    { label: 'Roles', path: '/maintenance/roles' },
     { label: 'Productos', path: '/maintenance/products' },
     { label: 'Sucursales', path: '/maintenance/branches' },
     { label: 'Tipos de documento', path: '/maintenance/document-types' }
@@ -22,5 +23,9 @@ export class DashboardShellComponent {
     { label: 'Cotizaciones', path: '/quotations/list' },
     { label: 'Pólizas', path: '/quotations/policies' },
     { label: 'Reportes', path: '/quotations/reports' }
+  ];
+
+  readonly settingsItems = [
+    { label: 'Configuración', path: '/settings/system-config' }
   ];
 }
