@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AppBrandComponent } from '../../../../shared/components/app-brand/app-brand.component';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-dashboard-shell',
@@ -12,6 +13,9 @@ import { AppBrandComponent } from '../../../../shared/components/app-brand/app-b
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardShellComponent {
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
   readonly isSidebarOpen = signal(false);
 
   onLogoLoad(event: Event) {
@@ -50,5 +54,10 @@ export class DashboardShellComponent {
 
   closeSidebar() {
     this.isSidebarOpen.set(false);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

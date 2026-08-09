@@ -171,6 +171,12 @@
   color: #10233f;
 }
 
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .topbar-badge {
   background: #e8f2ff;
   color: #1f5fbf;
