@@ -9,14 +9,7 @@
 
   <aside class="sidebar" [class.is-open]="isSidebarOpen()">
     <div class="brand">
-      <div class="brand-media">
-        <img class="brand-logo" src="/LOGO%20AUPAD%20NEGRO.png" alt="Logo de la empresa" (load)="onLogoLoad($event)" (error)="onLogoError($event)" />
-        <div class="brand-mark">BO</div>
-      </div>
-      <div>
-        <h2>Back Office</h2>
-        <p>Dashboard administrativo</p>
-      </div>
+      <app-brand [title]="'AUPAD'" [subtitle]="'Dashboard administrativo'" />
     </div>
 
     <nav class="nav-section" aria-label="Mantenimiento">

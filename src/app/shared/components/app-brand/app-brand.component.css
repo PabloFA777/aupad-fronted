@@ -1,0 +1,42 @@
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo {
+  max-height: 44px;
+  max-width: 110px;
+  object-fit: contain;
+}
+
+.brand-copy h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: inherit;
+}
+
+.brand-copy p {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.brand--compact .brand-logo {
+  max-height: 34px;
+  max-width: 90px;
+}
+
+.app-shell.dark-theme .brand-logo {
+  filter: brightness(0) invert(1);
+}
+
+.app-shell:not(.dark-theme) .brand-logo {
+  filter: none;
+}
