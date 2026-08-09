@@ -22,4 +22,16 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Back Office Dashboard');
   });
+
+  it('should toggle the dark theme on the document root', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+
+    expect(document.documentElement.classList.contains('dark-theme')).toBeFalse();
+
+    app.toggleTheme();
+    fixture.detectChanges();
+
+    expect(document.documentElement.classList.contains('dark-theme')).toBeTrue();
+  });
 });

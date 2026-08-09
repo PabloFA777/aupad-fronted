@@ -10,6 +10,16 @@
   color: #e2e8f0;
 }
 
+:root.dark-theme {
+  color-scheme: dark;
+  background-color: #0f172a;
+}
+
+body.dark-theme {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
 .theme-toggle {
   position: fixed;
   top: 16px;
