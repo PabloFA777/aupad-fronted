@@ -4,6 +4,7 @@
       <h3>Usuarios</h3>
       <p>Gestión de usuarios del sistema.</p>
     </div>
+    <button class="btn btn-primary" (click)="openModal()">+ Nuevo</button>
   </div>
 
   <div class="table-wrap">
@@ -15,19 +16,38 @@
           <th>Apellido</th>
           <th>Correo</th>
           <th>Estado</th>
+          <th class="text-end">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        @for (user of users(); track user.id) {
+        @for (user of paginatedItems(); track user.id) {
           <tr>
             <td>{{ user.id }}</td>
             <td>{{ user.nombre }}</td>
             <td>{{ user.apellido }}</td>
             <td>{{ user.correo }}</td>
             <td>{{ user.estado }}</td>
+            <td class="text-end">
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(user)">Editar</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="remove(user.id)">Eliminar</button>
+            </td>
           </tr>
         }
       </tbody>
     </table>
   </div>
+
+  <div class="pagination-row">
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === 1" (click)="prevPage()">Anterior</button>
+    <span>Página {{ page() }} de {{ totalPages() }}</span>
+    <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === totalPages()" (click)="nextPage()">Siguiente</button>
+  </div>
 </div>
+
+@if (isModalOpen()) {
+  <div class="modal-backdrop">
+    <div class="modal-card">
+      <app-users-form [item]="selectedItem()" (saved)="onSaved($event)" (closed)="closeModal()"></app-users-form>
+    </div>
+  </div>
+}

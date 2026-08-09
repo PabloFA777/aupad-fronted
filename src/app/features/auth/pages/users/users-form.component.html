@@ -1,0 +1,51 @@
+<div class="form-shell">
+  <div class="form-shell__header">
+    <h4>{{ item ? 'Editar usuario' : 'Nuevo usuario' }}</h4>
+    <button type="button" class="btn-close" (click)="close()">×</button>
+  </div>
+
+  <form class="form-grid" (ngSubmit)="save()">
+    <label>
+      <span>Nombre</span>
+      <input type="text" [(ngModel)]="form.nombre" name="nombre" />
+    </label>
+
+    <label>
+      <span>Apellido</span>
+      <input type="text" [(ngModel)]="form.apellido" name="apellido" />
+    </label>
+
+    <label>
+      <span>Correo</span>
+      <input type="email" [(ngModel)]="form.correo" name="correo" />
+    </label>
+
+    <label>
+      <span>Rol</span>
+      <input type="number" [(ngModel)]="form.rolId" name="rolId" />
+    </label>
+
+    <label>
+      <span>Estado</span>
+      <select [(ngModel)]="form.estado" name="estado">
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+      </select>
+    </label>
+
+    <label class="checkbox-row">
+      <input type="checkbox" [(ngModel)]="form.ingresoConfirmado" name="ingresoConfirmado" />
+      <span>Ingreso confirmado</span>
+    </label>
+
+    <label class="checkbox-row">
+      <input type="checkbox" [(ngModel)]="form.requiereCambioPassword" name="requiereCambioPassword" />
+      <span>Requiere cambio de contraseña</span>
+    </label>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+</div>

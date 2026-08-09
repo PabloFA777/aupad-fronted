@@ -1,0 +1,28 @@
+<div class="form-shell">
+  <div class="form-shell__header">
+    <h4>{{ item ? 'Editar configuración' : 'Nueva configuración' }}</h4>
+    <button type="button" class="btn-close" (click)="close()">×</button>
+  </div>
+
+  <form class="form-grid" (ngSubmit)="save()">
+    <label>
+      <span>Clave</span>
+      <input type="text" [(ngModel)]="form.clave" name="clave" />
+    </label>
+
+    <label>
+      <span>Valor</span>
+      <input type="text" [(ngModel)]="form.valor" name="valor" />
+    </label>
+
+    <label>
+      <span>Descripción</span>
+      <input type="text" [(ngModel)]="form.descripcion" name="descripcion" />
+    </label>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </form>
+</div>
