@@ -1,9 +1,7 @@
 import { Routes } from '@angular/router';
-import { DashboardShellComponent } from './components/dashboard-shell/dashboard-shell';
-import { HomePageComponent } from './pages/home/home-page';
-import { MaintenancePageComponent } from './pages/maintenance/maintenance-page';
-import { DocumentTypesListComponent } from './pages/maintenance/document-types/document-types-list';
-import { QuotationPageComponent } from './pages/quotations/quotation-page';
+import { DashboardShellComponent } from './features/dashboard/components/dashboard-shell/dashboard-shell.component';
+import { HomePageComponent } from './features/dashboard/pages/home/home-page.component';
+import { DocumentTypesListComponent } from './features/maintenance/pages/document-types/document-types-list.component';
 
 export const routes: Routes = [
   {
@@ -11,15 +9,15 @@ export const routes: Routes = [
     component: DashboardShellComponent,
     children: [
       { path: '', component: HomePageComponent },
-      { path: 'maintenance', component: MaintenancePageComponent },
-      { path: 'maintenance/users', component: MaintenancePageComponent },
-      { path: 'maintenance/products', component: MaintenancePageComponent },
-      { path: 'maintenance/branches', component: MaintenancePageComponent },
+      { path: 'maintenance', component: HomePageComponent },
+      { path: 'maintenance/users', component: HomePageComponent },
+      { path: 'maintenance/products', component: HomePageComponent },
+      { path: 'maintenance/branches', component: HomePageComponent },
       { path: 'maintenance/document-types', component: DocumentTypesListComponent },
-      { path: 'quotations', component: QuotationPageComponent },
-      { path: 'quotations/list', component: QuotationPageComponent },
-      { path: 'quotations/policies', component: QuotationPageComponent },
-      { path: 'quotations/reports', component: QuotationPageComponent }
+      { path: 'quotations', component: HomePageComponent },
+      { path: 'quotations/list', component: HomePageComponent },
+      { path: 'quotations/policies', component: HomePageComponent },
+      { path: 'quotations/reports', component: HomePageComponent }
     ]
   },
   { path: '**', redirectTo: '' }

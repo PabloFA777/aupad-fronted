@@ -1,0 +1,64 @@
+<div class="dashboard-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BO</div>
+      <div>
+        <h2>Back Office</h2>
+        <p>Dashboard administrativo</p>
+      </div>
+    </div>
+
+    <nav class="nav-section" aria-label="Mantenimiento">
+      <div class="nav-title">Mantenimiento</div>
+      @for (item of maintenanceItems; track item.path) {
+        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+          <span class="dot dot-blue"></span>
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+
+    <nav class="nav-section" aria-label="Cotización de Seguros">
+      <div class="nav-title">Cotización de Seguros</div>
+      @for (item of quotationItems; track item.path) {
+        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+          <span class="dot dot-green"></span>
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Panel principal</p>
+        <h1>Back Office Dashboard</h1>
+      </div>
+      <div class="topbar-badge">Operación activa</div>
+    </header>
+
+    <section class="summary-grid">
+      <article class="summary-card summary-card--blue">
+        <h3>Usuarios</h3>
+        <p>128 activos</p>
+      </article>
+      <article class="summary-card summary-card--red">
+        <h3>Cotizaciones</h3>
+        <p>42 pendientes</p>
+      </article>
+      <article class="summary-card summary-card--green">
+        <h3>Pólizas</h3>
+        <p>19 aprobadas</p>
+      </article>
+      <article class="summary-card summary-card--gray">
+        <h3>Alertas</h3>
+        <p>3 revisiones</p>
+      </article>
+    </section>
+
+    <section class="main-panel">
+      <router-outlet />
+    </section>
+  </main>
+</div>
