@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 interface DocumentTypeItem {
   id: number;
@@ -11,7 +12,7 @@ interface DocumentTypeItem {
 @Component({
   selector: 'app-document-types-form',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="modal-backdrop" (click)="close()">
       <div class="modal-card" (click)="$event.stopPropagation()">
@@ -59,19 +60,19 @@ export class DocumentTypesFormComponent {
   @Output() saved = new EventEmitter<DocumentTypeItem>();
   @Output() closed = new EventEmitter<void>();
 
-  readonly form = signal<DocumentTypeItem>({
+  form: DocumentTypeItem = {
     id: 0,
     code: '',
     description: '',
     status: 'Activo'
-  });
+  };
 
   ngOnChanges() {
-    this.form.set(this.item ? { ...this.item } : { id: 0, code: '', description: '', status: 'Activo' });
+    this.form = this.item ? { ...this.item } : { id: 0, code: '', description: '', status: 'Activo' };
   }
 
   save() {
-    const current = this.form();
+    const current = this.form;
     if (!current.code.trim() || !current.description.trim()) {
       return;
     }

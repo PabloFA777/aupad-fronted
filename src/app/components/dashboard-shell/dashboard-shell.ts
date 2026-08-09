@@ -13,7 +13,8 @@ export class DashboardShellComponent {
   readonly maintenanceItems = [
     { label: 'Usuarios', path: '/maintenance/users' },
     { label: 'Productos', path: '/maintenance/products' },
-    { label: 'Sucursales', path: '/maintenance/branches' }
+    { label: 'Sucursales', path: '/maintenance/branches' },
+    { label: 'Tipos de documento', path: '/maintenance/document-types' }
   ];
 
   readonly quotationItems = [

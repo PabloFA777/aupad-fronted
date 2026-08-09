@@ -13,60 +13,7 @@ interface DocumentTypeItem {
   selector: 'app-document-types-list',
   standalone: true,
   imports: [CommonModule, DocumentTypesFormComponent],
-  template: `
-    <div class="card-list">
-      <div class="card-list__header">
-        <div>
-          <h3>Tipos de documento</h3>
-          <p>Gestión de tipos de documento del sistema.</p>
-        </div>
-        <button class="btn btn-primary" (click)="openModal()">Agregar</button>
-      </div>
-
-      <div class="table-wrap">
-        <table class="table table-hover align-middle">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Código</th>
-              <th>Descripción</th>
-              <th>Estado</th>
-              <th class="text-end">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of paginatedItems()">
-              <td>{{ item.id }}</td>
-              <td>{{ item.code }}</td>
-              <td>{{ item.description }}</td>
-              <td>
-                <span class="badge" [ngClass]="item.status === 'Activo' ? 'bg-success' : 'bg-secondary'">
-                  {{ item.status }}
-                </span>
-              </td>
-              <td class="text-end">
-                <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(item)">Editar</button>
-                <button class="btn btn-sm btn-outline-danger" (click)="remove(item.id)">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="pagination-row">
-        <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === 1" (click)="prevPage()">Anterior</button>
-        <span>Página {{ page() }} de {{ totalPages() }}</span>
-        <button class="btn btn-outline-secondary btn-sm" [disabled]="page() === totalPages()" (click)="nextPage()">Siguiente</button>
-      </div>
-    </div>
-
-    <app-document-types-form
-      *ngIf="isModalOpen()"
-      [item]="selectedItem()"
-      (saved)="onSaved($event)"
-      (closed)="closeModal()"
-    ></app-document-types-form>
-  `,
+  templateUrl: './document-types-list.html',
   styles: [
     `
       .card-list { display: flex; flex-direction: column; gap: 16px; }
