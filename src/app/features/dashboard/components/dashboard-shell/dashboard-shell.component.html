@@ -1,4 +1,4 @@
-<div class="dashboard-shell">
+<div class="dashboard-shell" [class.dark-theme]="theme.isDarkMode()"></div>
   @if (isSidebarOpen()) {
     <div class="sidebar-overlay" (click)="closeSidebar()"></div>
   }
@@ -51,6 +51,9 @@
       </div>
       <div class="topbar-actions">
         <div class="topbar-badge">Operación activa</div>
+        <button class="theme-action-btn" type="button" (click)="theme.toggle()" [attr.aria-pressed]="theme.isDarkMode()" title="Cambiar tema">
+          <i class="bi" [class.bi-moon-fill]="!theme.isDarkMode()" [class.bi-sun-fill]="theme.isDarkMode()"></i>
+        </button>
         <button class="theme-action-btn logout-action" type="button" (click)="logout()" title="Cerrar sesión">
           <i class="bi bi-box-arrow-right"></i>
         </button>
