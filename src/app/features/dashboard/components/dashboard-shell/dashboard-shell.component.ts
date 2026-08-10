@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AppBrandComponent } from '../../../../shared/components/app-brand/app-brand.component';
 import { AuthService } from '../../../../core/services/auth.service';
+import { ThemeService } from '../../../../core/services/theme.service';
 
 @Component({
   selector: 'app-dashboard-shell',
@@ -15,6 +16,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 export class DashboardShellComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  readonly theme = inject(ThemeService);
 
   readonly isSidebarOpen = signal(false);
 

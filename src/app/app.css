@@ -20,25 +20,6 @@ body.dark-theme {
   color: #e2e8f0;
 }
 
-.theme-toggle {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 1200;
-  border: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #10233f;
-  color: white;
-  box-shadow: 0 8px 18px rgba(16, 35, 63, 0.2);
-}
-
-.app-shell.dark-theme .theme-toggle {
-  background: #f8fafc;
-  color: #0f172a;
-}
-
 .app-shell.dark-theme .sidebar {
   background: linear-gradient(180deg, #111827 0%, #1f2937 100%);
 }

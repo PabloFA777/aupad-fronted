@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ThemeService } from './core/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -9,27 +10,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit {
+export class App {
   protected readonly title = signal('aupad-frontend');
-  readonly isDarkMode = signal(false);
-
-  ngOnInit() {
-    const savedTheme = localStorage.getItem('aupad-theme');
-    if (savedTheme === 'dark') {
-      this.isDarkMode.set(true);
-    }
-    this.applyTheme();
-  }
-
-  toggleTheme() {
-    this.isDarkMode.update(value => !value);
-    this.applyTheme();
-  }
-
-  private applyTheme() {
-    const dark = this.isDarkMode();
-    document.documentElement.classList.toggle('dark-theme', dark);
-    document.body.classList.toggle('dark-theme', dark);
-    localStorage.setItem('aupad-theme', dark ? 'dark' : 'light');
-  }
+  protected readonly theme = inject(ThemeService);
 }

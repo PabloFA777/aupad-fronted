@@ -1,10 +1,3 @@
- 
-
-
-<div class="app-shell" [class.dark-theme]="isDarkMode()">
-  <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-pressed]="isDarkMode()" title="Cambiar tema">
-    <i class="bi" [class.bi-moon-fill]="!isDarkMode()" [class.bi-sun-fill]="isDarkMode()"></i>
-  </button>
-
+<div class="app-shell" [class.dark-theme]="theme.isDarkMode()">
   <router-outlet />
 </div>
