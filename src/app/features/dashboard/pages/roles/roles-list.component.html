@@ -1,9 +1,12 @@
-<div class="container">
-  <h2>Lista de Roles</h2>
-  <table class="table">
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Roles</h2>
+    <a routerLink="/seguridad/roles/nuevo" class="btn btn-primary">Nuevo Rol</a>
+  </div>
+
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Nombre</th>
         <th>Descripción</th>
         <th>Activo</th>
@@ -12,12 +15,12 @@
     </thead>
     <tbody>
       <tr *ngFor="let rol of roles">
-        <td>{{ rol.id }}</td>
         <td>{{ rol.nombre }}</td>
         <td>{{ rol.descripcion }}</td>
         <td>{{ rol.activo ? 'Sí' : 'No' }}</td>
         <td>
-          <button class="btn btn-danger" (click)="eliminarRol(rol.id)">Eliminar</button>
+          <a [routerLink]="['/seguridad/roles/editar', rol.id]" class="btn btn-sm btn-warning me-2">Editar</a>
+          <button (click)="eliminarRol(rol.id)" class="btn btn-sm btn-danger">Eliminar</button>
         </td>
       </tr>
     </tbody>

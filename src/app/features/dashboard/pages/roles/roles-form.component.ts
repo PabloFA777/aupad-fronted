@@ -51,11 +51,11 @@ export class RolesFormComponent implements OnInit {
       const rol: Rol = this.rolForm.value;
       if (this.isEditMode) {
         this.rolService.actualizar(this.rolId, rol).subscribe(() => {
-          this.router.navigate(['/roles']);
+          this.router.navigate(['/seguridad/roles']);
         });
       } else {
         this.rolService.crear(rol).subscribe(() => {
-          this.router.navigate(['/roles']);
+          this.router.navigate(['/seguridad/roles']);
         });
       }
     }

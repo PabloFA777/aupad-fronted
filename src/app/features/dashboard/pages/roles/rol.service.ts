@@ -9,7 +9,7 @@ import { Rol } from './rol.model';
 export class RolService extends BaseCrudService<Rol> {
   protected endpoint = 'Rol';
 
-  constructor(protected http: HttpClient) {
+  constructor(protected override http: HttpClient) {
     super(http);
   }
 }
