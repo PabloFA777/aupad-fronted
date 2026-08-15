@@ -9,19 +9,21 @@
 
     <form class="row g-3" (ngSubmit)="save()">
       <div class="col-md-6">
-        <label class="form-label">Código</label>
-        <input class="form-control" [(ngModel)]="form.code" name="code" required />
+        <label class="form-label">Nombre</label>
+        <input class="form-control" [(ngModel)]="form.nombre" name="nombre" required />
       </div>
-      <div class="col-md-6">
-        <label class="form-label">Estado</label>
-        <select class="form-select" [(ngModel)]="form.status" name="status">
-          <option value="Activo">Activo</option>
-          <option value="Inactivo">Inactivo</option>
-        </select>
-      </div>
+      @if (item) {
+        <div class="col-md-6">
+          <label class="form-label">Estado</label>
+          <select class="form-select" [(ngModel)]="form.activo" name="activo">
+            <option [ngValue]="true">Activo</option>
+            <option [ngValue]="false">Inactivo</option>
+          </select>
+        </div>
+      }
       <div class="col-12">
         <label class="form-label">Descripción</label>
-        <textarea class="form-control" rows="3" [(ngModel)]="form.description" name="description" required></textarea>
+        <textarea class="form-control" rows="3" [(ngModel)]="form.descripcion" name="descripcion"></textarea>
       </div>
 
       <div class="col-12 d-flex justify-content-end gap-2">

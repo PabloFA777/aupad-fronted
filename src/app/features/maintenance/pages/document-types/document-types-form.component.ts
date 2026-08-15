@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DocumentTypeModel } from '../../../../core/models/document-type.model';
+import { DocumentType, DocumentTypeCreate, DocumentTypeUpdate } from '../../../../core/models/document-type.model';
 
 @Component({
   selector: 'app-document-types-form',
@@ -11,28 +11,44 @@ import { DocumentTypeModel } from '../../../../core/models/document-type.model';
   styleUrl: './document-types-form.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DocumentTypesFormComponent {
-  @Input() item: DocumentTypeModel | null = null;
-  @Output() saved = new EventEmitter<DocumentTypeModel>();
+export class DocumentTypesFormComponent implements OnChanges {
+  @Input() item: DocumentType | null = null;
+  @Output() saved = new EventEmitter<DocumentTypeCreate | DocumentTypeUpdate>();
   @Output() closed = new EventEmitter<void>();
 
-  form: DocumentTypeModel = {
-    id: 0,
-    code: '',
-    description: '',
-    status: 'Activo'
+  form: { nombre: string; descripcion: string; activo: boolean } = {
+    nombre: '',
+    descripcion: '',
+    activo: true
   };
 
   ngOnChanges() {
-    this.form = this.item ? { ...this.item } : { id: 0, code: '', description: '', status: 'Activo' };
+    this.form = this.item
+      ? { nombre: this.item.nombre, descripcion: this.item.descripcion ?? '', activo: this.item.activo }
+      : { nombre: '', descripcion: '', activo: true };
   }
 
   save() {
-    const current = this.form;
-    if (!current.code.trim() || !current.description.trim()) {
+    if (!this.form.nombre.trim()) {
       return;
     }
-    this.saved.emit({ ...current, id: current.id || Date.now() });
+
+    if (this.item) {
+      // Edición: se envía activo también (DocumentTypeUpdate)
+      const payload: DocumentTypeUpdate = {
+        nombre: this.form.nombre,
+        descripcion: this.form.descripcion || null,
+        activo: this.form.activo
+      };
+      this.saved.emit(payload);
+    } else {
+      // Creación: sin activo (lo asigna el backend por defecto)
+      const payload: DocumentTypeCreate = {
+        nombre: this.form.nombre,
+        descripcion: this.form.descripcion || null
+      };
+      this.saved.emit(payload);
+    }
   }
 
   close() {
