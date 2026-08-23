@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { RolesFormComponent } from './roles-form.component';
-import { RoleModel } from '../../../../core/models/role.model';
+import { Rol } from './rol.model';
+import { RolService } from './rol.service';
 
 @Component({
   selector: 'app-roles-list',
@@ -11,17 +12,26 @@ import { RoleModel } from '../../../../core/models/role.model';
   styleUrl: './roles-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RolesListComponent {
-  private readonly itemsSignal = signal<RoleModel[]>([
-    { id: 1, nombre: 'Administrador' },
-    { id: 2, nombre: 'Asistente' }
-  ]);
+export class RolesListComponent implements OnInit {
+  private readonly itemsSignal = signal<Rol[]>([]);
 
+constructor(private rolService: RolService) {}
+
+ngOnInit(): void {
+  this.cargarRoles();
+}
+
+private cargarRoles(): void {
+  this.rolService.obtenerTodos().subscribe(roles => {
+    this.itemsSignal.set(roles);
+    this.refreshPage();
+  });
+}
   readonly page = signal(1);
   readonly pageSize = 3;
   readonly isModalOpen = signal(false);
-  readonly selectedItem = signal<RoleModel | null>(null);
-  readonly paginatedItems = signal<RoleModel[]>(this.itemsSignal().slice(0, this.pageSize));
+  readonly selectedItem = signal<Rol | null>(null);
+  readonly paginatedItems = signal<Rol[]>(this.itemsSignal().slice(0, this.pageSize));
   readonly totalPages = signal(Math.ceil(this.itemsSignal().length / this.pageSize));
 
   openModal() {
@@ -29,14 +39,15 @@ export class RolesListComponent {
     this.isModalOpen.set(true);
   }
 
-  edit(item: RoleModel) {
-    this.selectedItem.set(item);
-    this.isModalOpen.set(true);
+  edit(item: Rol) {
+  this.selectedItem.set(item);
+  this.isModalOpen.set(true);
   }
 
   remove(id: number) {
-    this.itemsSignal.update(items => items.filter(item => item.id !== id));
-    this.refreshPage();
+    this.rolService.eliminar(id).subscribe(() => {
+      this.cargarRoles();
+    });
   }
 
   prevPage() {
@@ -53,15 +64,8 @@ export class RolesListComponent {
     }
   }
 
-  onSaved(item: RoleModel) {
-    const current = this.itemsSignal();
-    const exists = current.some(entry => entry.id === item.id);
-    if (exists) {
-      this.itemsSignal.update(items => items.map(entry => entry.id === item.id ? item : entry));
-    } else {
-      this.itemsSignal.update(items => [{ ...item, id: Date.now() }, ...items]);
-    }
-    this.refreshPage();
+  onSaved(item: Rol) {
+    this.cargarRoles();
     this.closeModal();
   }
 
