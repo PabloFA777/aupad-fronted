@@ -1,4 +1,12 @@
-<form class="form-grid" (ngSubmit)="save()">
+<div class="form-shell">
+  <div class="form-shell__header">
+    <h4>{{ item ? 'Editar rol' : 'Nuevo rol' }}</h4>
+    <button type="button" class="btn-close" (click)="close()" title="Cerrar">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <form class="form-grid" (ngSubmit)="save()">
     <label>
       <span>Nombre</span>
       <input type="text" [(ngModel)]="form.nombre" name="nombre" />
@@ -8,6 +16,10 @@
       <span>Descripción</span>
       <input type="text" [(ngModel)]="form.descripcion" name="descripcion" />
     </label>
+    
+      <div class="form-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
 
     <div class="form-actions">
       <button type="button" class="btn btn-outline-secondary" (click)="close()" title="Cancelar">
@@ -18,3 +30,4 @@
       </button>
     </div>
   </form>
+</div>
