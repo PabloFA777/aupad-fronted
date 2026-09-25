@@ -2,7 +2,7 @@
   <div class="card-list__header">
     <div>
       <h3>Seguros</h3>
-      <p>Gestión de seguros para cotización y contratación.</p>
+      <p>Gestión del catálogo de seguros del sistema.</p>
     </div>
     <button class="btn btn-primary" (click)="openModal()" title="Agregar">
       <i class="bi bi-plus-lg"></i>
@@ -14,32 +14,30 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Categoría</th>
           <th>Código</th>
           <th>Nombre</th>
-          <th>Descripción</th>
+          <th>Categoría ID</th>
           <th>Estado</th>
           <th class="text-end">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        @for (item of paginatedItems(); track item.id) {
+        @for (seguro of paginatedItems(); track seguro.id) {
           <tr>
-            <td>{{ item.id }}</td>
-            <td>{{ item.categoriaId }}</td>
-            <td>{{ item.codigo }}</td>
-            <td>{{ item.nombre }}</td>
-            <td>{{ item.descripcion }}</td>
+            <td>{{ seguro.id }}</td>
+            <td><code>{{ seguro.codigo }}</code></td>
+            <td>{{ seguro.nombre }}</td>
+            <td>{{ seguro.categoriaId }}</td>
             <td>
-              <span class="badge" [ngClass]="item.activo ? 'bg-success' : 'bg-secondary'">
-                {{ item.activo ? 'Activo' : 'Inactivo' }}
+              <span class="badge" [ngClass]="seguro.activo ? 'bg-success' : 'bg-secondary'">
+                {{ seguro.activo ? 'Activo' : 'Inactivo' }}
               </span>
             </td>
             <td class="text-end">
-              <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(item)" title="Editar">
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(seguro)" title="Editar">
                 <i class="bi bi-pencil-square"></i>
               </button>
-              <button class="btn btn-sm btn-outline-danger" (click)="remove(item.id)" title="Eliminar">
+              <button class="btn btn-sm btn-outline-danger" (click)="remove(seguro.id)" title="Eliminar">
                 <i class="bi bi-trash"></i>
               </button>
             </td>
@@ -60,9 +58,10 @@
   </div>
 </div>
 
-<app-insurance-form
-  *ngIf="isModalOpen()"
-  [item]="selectedItem()"
-  (saved)="onSaved($event)"
-  (closed)="closeModal()"
-></app-insurance-form>
+@if (isModalOpen()) {
+  <div class="modal-backdrop">
+    <div class="modal-card">
+      <app-insurance-form [item]="selectedItem()" (saved)="onSaved($event)" (closed)="closeModal()"></app-insurance-form>
+    </div>
+  </div>
+}

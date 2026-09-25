@@ -1,8 +1,8 @@
 <div class="card-list">
   <div class="card-list__header">
     <div>
-      <h3>Usuarios</h3>
-      <p>Gestión de usuarios del sistema.</p>
+      <h3>Categorías de Seguro</h3>
+      <p>Gestión de categorías de seguro del sistema.</p>
     </div>
     <button class="btn btn-primary" (click)="openModal()" title="Agregar">
       <i class="bi bi-plus-lg"></i>
@@ -15,25 +15,21 @@
         <tr>
           <th>ID</th>
           <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Correo</th>
-          <th>Estado</th>
+          <th>Categoría Padre ID</th>
           <th class="text-end">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        @for (user of paginatedItems(); track user.id) {
+        @for (categoria of paginatedItems(); track categoria.id) {
           <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.nombre }}</td>
-            <td>{{ user.apellido }}</td>
-            <td>{{ user.correo }}</td>
-            <td>{{ user.estado }}</td>
+            <td>{{ categoria.id }}</td>
+            <td>{{ categoria.nombre }}</td>
+            <td>{{ categoria.categoriaPadreId ?? '-' }}</td>
             <td class="text-end">
-              <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(user)" title="Editar">
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(categoria)" title="Editar">
                 <i class="bi bi-pencil-square"></i>
               </button>
-              <button class="btn btn-sm btn-outline-danger" (click)="remove(user.id)" title="Eliminar">
+              <button class="btn btn-sm btn-outline-danger" (click)="remove(categoria.id)" title="Eliminar">
                 <i class="bi bi-trash"></i>
               </button>
             </td>
@@ -57,7 +53,7 @@
 @if (isModalOpen()) {
   <div class="modal-backdrop">
     <div class="modal-card">
-      <app-usuarios-form [item]="selectedItem()" (saved)="onSaved()" (closed)="closeModal()"></app-usuarios-form>
+      <app-categorias-seguro-form [item]="selectedItem()" (saved)="onSaved($event)" (closed)="closeModal()"></app-categorias-seguro-form>
     </div>
   </div>
 }

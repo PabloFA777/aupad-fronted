@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { InsuranceModel } from '../../../../core/models/insurance.model';
+import { InsuranceModel } from './insurance.model';
+import { InsuranceService } from './insurance.service';
 
 @Component({
   selector: 'app-insurance-form',
@@ -11,32 +12,48 @@ import { InsuranceModel } from '../../../../core/models/insurance.model';
   styleUrl: './insurance-form.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InsuranceFormComponent {
+export class InsuranceFormComponent implements OnChanges {
   @Input() item: InsuranceModel | null = null;
   @Output() saved = new EventEmitter<InsuranceModel>();
   @Output() closed = new EventEmitter<void>();
 
-  form: InsuranceModel = {
-    id: 0,
-    categoriaId: 0,
-    codigo: '',
-    nombre: '',
-    descripcion: '',
-    activo: true,
-    usuarioCreoId: null,
-    usuarioActualizoId: null
-  };
+  form: Partial<InsuranceModel> = { categoriaId: 1, codigo: '', nombre: '', descripcion: '', activo: true };
+  errorMessage: string | null = null;
+
+  constructor(private insuranceService: InsuranceService, private cdr: ChangeDetectorRef) {}
 
   ngOnChanges() {
-    this.form = this.item ? { ...this.item } : { id: 0, categoriaId: 0, codigo: '', nombre: '', descripcion: '', activo: true, usuarioCreoId: null, usuarioActualizoId: null };
+    this.form = this.item
+      ? { ...this.item }
+      : { categoriaId: 1, codigo: '', nombre: '', descripcion: '', activo: true };
   }
 
   save() {
-    const current = this.form;
-    if (!current.codigo.trim() || !current.nombre.trim() || !current.descripcion.trim()) {
+    if (!this.form.codigo?.trim() || !this.form.nombre?.trim()) {
+      this.errorMessage = 'El código y el nombre son obligatorios.';
+      this.cdr.markForCheck();
       return;
     }
-    this.saved.emit({ ...current, id: current.id || Date.now() });
+
+    this.errorMessage = null;
+
+    if (this.form.id) {
+      this.insuranceService.actualizar(this.form.id, this.form as InsuranceModel).subscribe({
+        next: (res) => this.saved.emit(res),
+        error: (err) => {
+          this.errorMessage = 'No se pudo actualizar el seguro. Intenta nuevamente.';
+          this.cdr.markForCheck();
+        }
+      });
+    } else {
+      this.insuranceService.crear(this.form as InsuranceModel).subscribe({
+        next: (res) => this.saved.emit(res),
+        error: (err) => {
+          this.errorMessage = 'No se pudo crear el seguro. Intenta nuevamente.';
+          this.cdr.markForCheck();
+        }
+      });
+    }
   }
 
   close() {

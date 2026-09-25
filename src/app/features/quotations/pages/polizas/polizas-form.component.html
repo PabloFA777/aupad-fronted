@@ -1,0 +1,95 @@
+<div class="form-shell">
+  <div class="form-shell__header">
+    <h4>{{ item ? 'Editar póliza' : 'Nueva póliza' }}</h4>
+    <button type="button" class="btn-close" (click)="close()" title="Cerrar">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <form class="form-grid" (ngSubmit)="save()">
+    <label>
+      <span>N° de Póliza</span>
+      <input type="text" [(ngModel)]="form.numeroPoliza" name="numeroPoliza" required />
+    </label>
+
+    <label>
+      <span>Cliente ID</span>
+      <input type="number" [(ngModel)]="form.clienteId" name="clienteId" required />
+    </label>
+
+    <label>
+      <span>Seguro ID</span>
+      <input type="number" [(ngModel)]="form.seguroId" name="seguroId" required />
+    </label>
+
+    <label>
+      <span>Compañía ID</span>
+      <input type="number" [(ngModel)]="form.companiaId" name="companiaId" required />
+    </label>
+
+    <label>
+      <span>Fecha Inicio</span>
+      <input type="date" [(ngModel)]="form.fechaInicio" name="fechaInicio" required />
+    </label>
+
+    <label>
+      <span>Fecha Vencimiento</span>
+      <input type="date" [(ngModel)]="form.fechaVencimiento" name="fechaVencimiento" required />
+    </label>
+
+    <label>
+      <span>Suma Asegurada</span>
+      <input type="number" step="0.01" [(ngModel)]="form.sumaAsegurada" name="sumaAsegurada" required />
+    </label>
+
+    <label>
+      <span>Prima Neta</span>
+      <input type="number" step="0.01" [(ngModel)]="form.primaNeta" name="primaNeta" required />
+    </label>
+
+    <label>
+      <span>Moneda</span>
+      <select [(ngModel)]="form.moneda" name="moneda">
+        @for (opt of monedaOptions; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Periodicidad Pago</span>
+      <select [(ngModel)]="form.periodicidadPago" name="periodicidadPago">
+        @for (opt of periodicidadOptions; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Estado</span>
+      <select [(ngModel)]="form.estado" name="estado">
+        @for (opt of estadoOptions; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Cobertura</span>
+      <input type="text" [(ngModel)]="form.cobertura" name="cobertura" />
+    </label>
+
+    <div class="form-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()" title="Cancelar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button type="submit" class="btn btn-primary" title="Guardar">
+        <i class="bi bi-check-lg"></i>
+      </button>
+    </div>
+  </form>
+</div>

@@ -33,7 +33,7 @@ export class DashboardShellComponent {
   }
 
   readonly maintenanceItems = [
-    { label: 'Usuarios', path: '/maintenance/users' },
+    { label: 'Usuarios', path: '/seguridad/usuarios' },
     { label: 'Roles', path: '/seguridad/roles' },
     { label: 'Productos', path: '/maintenance/products' },
     { label: 'Sucursales', path: '/maintenance/branches' },

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { UsuariosFormComponent } from './usuarios-form.component';
-import { UserModel } from '../../../../core/models/user.model';
+import { Usuario } from './usuario.model';
+import { UsuarioService } from './usuario.service';
 
 @Component({
   selector: 'app-usuarios-list',
@@ -11,32 +12,50 @@ import { UserModel } from '../../../../core/models/user.model';
   styleUrl: './usuarios-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UsuariosListComponent {
-  private readonly itemsSignal = signal<UserModel[]>([
-    { id: 1, rolId: 1, nombre: 'Carlos', apellido: 'Pérez', correo: 'carlos@aupad.com', estado: 'activo', ingresoConfirmado: true, requiereCambioPassword: false },
-    { id: 2, rolId: 2, nombre: 'Ana', apellido: 'García', correo: 'ana@aupad.com', estado: 'inactivo', ingresoConfirmado: false, requiereCambioPassword: true }
-  ]);
+export class UsuariosListComponent implements OnInit {
+  private readonly itemsSignal = signal<Usuario[]>([]);
 
   readonly page = signal(1);
   readonly pageSize = 3;
   readonly isModalOpen = signal(false);
-  readonly selectedItem = signal<UserModel | null>(null);
-  readonly paginatedItems = signal<UserModel[]>(this.itemsSignal().slice(0, this.pageSize));
-  readonly totalPages = signal(Math.ceil(this.itemsSignal().length / this.pageSize));
+  readonly selectedItem = signal<Usuario | null>(null);
+  readonly paginatedItems = signal<Usuario[]>([]);
+  readonly totalPages = signal(1);
+
+  constructor(private usuarioService: UsuarioService) {}
+
+  ngOnInit(): void {
+    this.cargarUsuarios();
+  }
+
+  private cargarUsuarios(): void {
+    this.usuarioService.obtenerTodos().subscribe({
+      next: (usuarios) => {
+        this.itemsSignal.set(usuarios);
+        this.refreshPage();
+      },
+      error: (err) => console.error('Error al cargar usuarios', err)
+    });
+  }
 
   openModal() {
     this.selectedItem.set(null);
     this.isModalOpen.set(true);
   }
 
-  edit(item: UserModel) {
+  edit(item: Usuario) {
     this.selectedItem.set(item);
     this.isModalOpen.set(true);
   }
 
   remove(id: number) {
-    this.itemsSignal.update(items => items.filter(item => item.id !== id));
-    this.refreshPage();
+    this.usuarioService.eliminar(id).subscribe({
+      next: () => {
+        this.itemsSignal.update(items => items.filter(item => item.id !== id));
+        this.refreshPage();
+      },
+      error: (err) => console.error('Error al eliminar usuario', err)
+    });
   }
 
   prevPage() {
@@ -53,15 +72,8 @@ export class UsuariosListComponent {
     }
   }
 
-  onSaved(item: UserModel) {
-    const current = this.itemsSignal();
-    const exists = current.some(entry => entry.id === item.id);
-    if (exists) {
-      this.itemsSignal.update(items => items.map(entry => entry.id === item.id ? item : entry));
-    } else {
-      this.itemsSignal.update(items => [{ ...item, id: Date.now() }, ...items]);
-    }
-    this.refreshPage();
+  onSaved(): void {
+    this.cargarUsuarios();
     this.closeModal();
   }
 

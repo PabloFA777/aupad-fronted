@@ -1,0 +1,71 @@
+<div class="form-shell">
+  <div class="form-shell__header">
+    <h4>{{ item ? 'Editar cliente' : 'Nuevo cliente' }}</h4>
+    <button type="button" class="btn-close" (click)="close()" title="Cerrar">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <form class="form-grid" (ngSubmit)="save()">
+    <label>
+      <span>Tipo de Cliente</span>
+      <select [(ngModel)]="form.tipoCliente" name="tipoCliente">
+        @for (opt of tiposClienteOptions; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Tipo de Documento</span>
+      <select [(ngModel)]="form.tipoDocumento" name="tipoDocumento">
+        @for (opt of tiposDocumentoOptions; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Número de Documento</span>
+      <input type="text" [(ngModel)]="form.numeroDocumento" name="numeroDocumento" required />
+    </label>
+
+    <label>
+      <span>Nombre / Razón Social</span>
+      <input type="text" [(ngModel)]="form.nombreRazonSocial" name="nombreRazonSocial" required />
+    </label>
+
+    <label>
+      <span>Correo Electrónico</span>
+      <input type="email" [(ngModel)]="form.correo" name="correo" required />
+    </label>
+
+    <label>
+      <span>Teléfono</span>
+      <input type="text" [(ngModel)]="form.telefono" name="telefono" required />
+    </label>
+
+    <label>
+      <span>Dirección</span>
+      <input type="text" [(ngModel)]="form.direccion" name="direccion" />
+    </label>
+
+    <label>
+      <span>Observaciones</span>
+      <input type="text" [(ngModel)]="form.observaciones" name="observaciones" />
+    </label>
+
+    <div class="form-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()" title="Cancelar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button type="submit" class="btn btn-primary" title="Guardar">
+        <i class="bi bi-check-lg"></i>
+      </button>
+    </div>
+  </form>
+</div>

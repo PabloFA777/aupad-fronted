@@ -1,6 +1,6 @@
 <div class="form-shell">
   <div class="form-shell__header">
-    <h4>{{ item ? 'Editar seguro' : 'Nuevo seguro' }}</h4>
+    <h4>{{ item ? 'Editar categoría de seguro' : 'Nueva categoría de seguro' }}</h4>
     <button type="button" class="btn-close" (click)="close()" title="Cerrar">
       <i class="bi bi-x-lg"></i>
     </button>
@@ -8,23 +8,13 @@
 
   <form class="form-grid" (ngSubmit)="save()">
     <label>
-      <span>Categoría ID</span>
-      <input type="number" [(ngModel)]="form.categoriaId" name="categoriaId" required />
-    </label>
-
-    <label>
-      <span>Código</span>
-      <input type="text" [(ngModel)]="form.codigo" name="codigo" required />
-    </label>
-
-    <label>
       <span>Nombre</span>
-      <input type="text" [(ngModel)]="form.nombre" name="nombre" required />
+      <input type="text" [(ngModel)]="form.nombre" name="nombre" />
     </label>
 
     <label>
-      <span>Descripción</span>
-      <input type="text" [(ngModel)]="form.descripcion" name="descripcion" />
+      <span>Categoría Padre ID</span>
+      <input type="number" [(ngModel)]="form.categoriaPadreId" name="categoriaPadreId" />
     </label>
 
     <div class="form-error" *ngIf="errorMessage">

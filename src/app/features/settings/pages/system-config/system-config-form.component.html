@@ -9,18 +9,22 @@
   <form class="form-grid" (ngSubmit)="save()">
     <label>
       <span>Clave</span>
-      <input type="text" [(ngModel)]="form.clave" name="clave" />
+      <input type="text" [(ngModel)]="form.clave" name="clave" placeholder="Ej: empresa.nombre" />
     </label>
 
     <label>
       <span>Valor</span>
-      <input type="text" [(ngModel)]="form.valor" name="valor" />
+      <input type="text" [(ngModel)]="form.valor" name="valor" placeholder="Ej: AUPAD Seguros" />
     </label>
 
     <label>
       <span>Descripción</span>
-      <input type="text" [(ngModel)]="form.descripcion" name="descripcion" />
+      <input type="text" [(ngModel)]="form.descripcion" name="descripcion" placeholder="Descripción opcional" />
     </label>
+
+    <div class="form-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
 
     <div class="form-actions">
       <button type="button" class="btn btn-outline-secondary" (click)="close()" title="Cancelar">

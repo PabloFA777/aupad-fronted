@@ -9,6 +9,8 @@ import { SystemConfigListComponent } from './features/settings/pages/system-conf
 import { InsuranceListComponent } from './features/quotations/pages/insurance/insurance-list.component';
 import { authGuard } from './core/guards/auth.guard';
 import { RolesFormComponent } from './features/auth/pages/roles/roles-form.component';
+import { CategoriasSeguroListComponent } from './features/maintenance/pages/categorias-seguro/categorias-seguro-list.component';
+import { CompaniasSeguroListComponent } from './features/maintenance/pages/companias-seguro/companias-seguro-list.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,6 +25,8 @@ export const routes: Routes = [
       { path: 'seguridad/roles/nuevo', component: RolesFormComponent },
       { path: 'seguridad/roles/editar/:id', component: RolesFormComponent },
       { path: 'maintenance/document-types', component: DocumentTypesListComponent },
+      { path: 'maintenance/categorias-seguro', component: CategoriasSeguroListComponent },
+      { path: 'maintenance/companias-seguro', component: CompaniasSeguroListComponent },
       { path: 'settings/system-config', component: SystemConfigListComponent },
       { path: 'quotations', component: InsuranceListComponent },
       { path: 'quotations/list', component: InsuranceListComponent },

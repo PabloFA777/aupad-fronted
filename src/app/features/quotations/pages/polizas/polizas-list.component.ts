@@ -1,29 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
-import { InsuranceFormComponent } from './insurance-form.component';
-import { InsuranceModel } from './insurance.model';
-import { InsuranceService } from './insurance.service';
+import { PolizasFormComponent } from './polizas-form.component';
+import { Poliza } from './poliza.model';
+import { PolizaService } from './poliza.service';
 
 @Component({
-  selector: 'app-insurance-list',
+  selector: 'app-polizas-list',
   standalone: true,
-  imports: [CommonModule, InsuranceFormComponent],
-  templateUrl: './insurance-list.component.html',
-  styleUrl: './insurance-list.component.css',
+  imports: [CommonModule, PolizasFormComponent],
+  templateUrl: './polizas-list.component.html',
+  styleUrl: './polizas-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InsuranceListComponent implements OnInit {
-  private readonly itemsSignal = signal<InsuranceModel[]>([]);
+export class PolizasListComponent implements OnInit {
+  private readonly itemsSignal = signal<Poliza[]>([]);
 
-  constructor(private insuranceService: InsuranceService) {}
+  constructor(private polizaService: PolizaService) {}
 
   ngOnInit(): void {
-    this.cargarSeguros();
+    this.cargarPolizas();
   }
 
-  private cargarSeguros(): void {
-    this.insuranceService.obtenerTodos().subscribe(seguros => {
-      this.itemsSignal.set(seguros);
+  private cargarPolizas(): void {
+    this.polizaService.obtenerTodos().subscribe(polizas => {
+      this.itemsSignal.set(polizas);
       this.refreshPage();
     });
   }
@@ -31,8 +31,8 @@ export class InsuranceListComponent implements OnInit {
   readonly page = signal(1);
   readonly pageSize = 3;
   readonly isModalOpen = signal(false);
-  readonly selectedItem = signal<InsuranceModel | null>(null);
-  readonly paginatedItems = signal<InsuranceModel[]>([]);
+  readonly selectedItem = signal<Poliza | null>(null);
+  readonly paginatedItems = signal<Poliza[]>([]);
   readonly totalPages = signal(1);
 
   openModal() {
@@ -40,14 +40,14 @@ export class InsuranceListComponent implements OnInit {
     this.isModalOpen.set(true);
   }
 
-  edit(item: InsuranceModel) {
+  edit(item: Poliza) {
     this.selectedItem.set(item);
     this.isModalOpen.set(true);
   }
 
   remove(id: number) {
-    this.insuranceService.eliminar(id).subscribe(() => {
-      this.cargarSeguros();
+    this.polizaService.eliminar(id).subscribe(() => {
+      this.cargarPolizas();
     });
   }
 
@@ -65,8 +65,8 @@ export class InsuranceListComponent implements OnInit {
     }
   }
 
-  onSaved(item: InsuranceModel) {
-    this.cargarSeguros();
+  onSaved(item: Poliza) {
+    this.cargarPolizas();
     this.closeModal();
   }
 

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { SystemConfigFormComponent } from './system-config-form.component';
-import { SystemConfigModel } from '../../../../core/models/system-config.model';
+import { SystemConfigModel } from './system-config.model';
+import { SystemConfigService } from './system-config.service';
 
 @Component({
   selector: 'app-system-config-list',
@@ -11,18 +12,28 @@ import { SystemConfigModel } from '../../../../core/models/system-config.model';
   styleUrl: './system-config-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SystemConfigListComponent {
-  private readonly itemsSignal = signal<SystemConfigModel[]>([
-    { id: 1, clave: 'empresa.nombre', valor: 'AUPAD', descripcion: 'Nombre de la empresa' },
-    { id: 2, clave: 'empresa.moneda', valor: 'Soles', descripcion: 'Moneda base' }
-  ]);
+export class SystemConfigListComponent implements OnInit {
+  private readonly itemsSignal = signal<SystemConfigModel[]>([]);
+
+  constructor(private systemConfigService: SystemConfigService) {}
+
+  ngOnInit(): void {
+    this.cargarConfiguraciones();
+  }
+
+  private cargarConfiguraciones(): void {
+    this.systemConfigService.obtenerTodos().subscribe(configuraciones => {
+      this.itemsSignal.set(configuraciones);
+      this.refreshPage();
+    });
+  }
 
   readonly page = signal(1);
   readonly pageSize = 3;
   readonly isModalOpen = signal(false);
   readonly selectedItem = signal<SystemConfigModel | null>(null);
-  readonly paginatedItems = signal<SystemConfigModel[]>(this.itemsSignal().slice(0, this.pageSize));
-  readonly totalPages = signal(Math.ceil(this.itemsSignal().length / this.pageSize));
+  readonly paginatedItems = signal<SystemConfigModel[]>([]);
+  readonly totalPages = signal(1);
 
   openModal() {
     this.selectedItem.set(null);
@@ -35,8 +46,9 @@ export class SystemConfigListComponent {
   }
 
   remove(id: number) {
-    this.itemsSignal.update(items => items.filter(item => item.id !== id));
-    this.refreshPage();
+    this.systemConfigService.eliminar(id).subscribe(() => {
+      this.cargarConfiguraciones();
+    });
   }
 
   prevPage() {
@@ -54,14 +66,7 @@ export class SystemConfigListComponent {
   }
 
   onSaved(item: SystemConfigModel) {
-    const current = this.itemsSignal();
-    const exists = current.some(entry => entry.id === item.id);
-    if (exists) {
-      this.itemsSignal.update(items => items.map(entry => entry.id === item.id ? item : entry));
-    } else {
-      this.itemsSignal.update(items => [{ ...item, id: Date.now() }, ...items]);
-    }
-    this.refreshPage();
+    this.cargarConfiguraciones();
     this.closeModal();
   }
 

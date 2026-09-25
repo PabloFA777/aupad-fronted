@@ -1,0 +1,8 @@
+.card-list { background: #fff; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.card-list__header { display: flex; justify-content: space-between; align-items: center; }
+.card-list__header h3 { margin: 0; color: #1a2233; }
+.card-list__header p { margin: 4px 0 0; color: #6c757d; font-size: 0.9rem; }
+.table-wrap { overflow-x: auto; }
+.pagination-row { display: flex; justify-content: flex-end; align-items: center; gap: 12px; font-size: 0.9rem; }
+.modal-backdrop { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.4); display: flex; justify-content: center; align-items: center; z-index: 1050; }
+.modal-card { min-width: 400px; max-width: 600px; width: 100%; }

@@ -1,0 +1,58 @@
+<div class="form-shell">
+  <div class="form-shell__header">
+    <h4>{{ item ? 'Editar compañía de seguro' : 'Nueva compañía de seguro' }}</h4>
+    <button type="button" class="btn-close" (click)="close()" title="Cerrar">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <form class="form-grid" (ngSubmit)="save()">
+    <label>
+      <span>Nombre</span>
+      <input type="text" [(ngModel)]="form.nombre" name="nombre" />
+    </label>
+
+    <label>
+      <span>RUC</span>
+      <input type="text" [(ngModel)]="form.ruc" name="ruc" />
+    </label>
+
+    <label>
+      <span>Teléfono</span>
+      <input type="text" [(ngModel)]="form.telefono" name="telefono" />
+    </label>
+
+    <label>
+      <span>Correo</span>
+      <input type="email" [(ngModel)]="form.correo" name="correo" />
+    </label>
+
+    <label>
+      <span>Dirección</span>
+      <input type="text" [(ngModel)]="form.direccion" name="direccion" />
+    </label>
+
+    <label>
+      <span>Página Web</span>
+      <input type="text" [(ngModel)]="form.paginaWeb" name="paginaWeb" />
+    </label>
+
+    <label>
+      <span>Contacto Comercial</span>
+      <input type="text" [(ngModel)]="form.contactoComercial" name="contactoComercial" />
+    </label>
+
+    <div class="form-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()" title="Cancelar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button type="submit" class="btn btn-primary" title="Guardar">
+        <i class="bi bi-check-lg"></i>
+      </button>
+    </div>
+  </form>
+</div>

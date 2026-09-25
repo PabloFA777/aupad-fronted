@@ -2,7 +2,7 @@
   <div class="card-list__header">
     <div>
       <h3>Configuración del Sistema</h3>
-      <p>Parámetros generales de la aplicación.</p>
+      <p>Gestión de parámetros y variables globales del sistema.</p>
     </div>
     <button class="btn btn-primary" (click)="openModal()" title="Agregar">
       <i class="bi bi-plus-lg"></i>
@@ -24,9 +24,9 @@
         @for (config of paginatedItems(); track config.id) {
           <tr>
             <td>{{ config.id }}</td>
-            <td>{{ config.clave }}</td>
+            <td><code>{{ config.clave }}</code></td>
             <td>{{ config.valor }}</td>
-            <td>{{ config.descripcion }}</td>
+            <td>{{ config.descripcion || '-' }}</td>
             <td class="text-end">
               <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(config)" title="Editar">
                 <i class="bi bi-pencil-square"></i>
