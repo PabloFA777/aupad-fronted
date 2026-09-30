@@ -1,0 +1,69 @@
+<div class="panel">
+  <div class="panel__header">
+    <div>
+      <h3>Cuotas de Póliza</h3>
+      <p>Gestión de cuotas y pagos.</p>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="openModal()" title="Nueva cuota">
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Póliza</th>
+        <th>N° Cuota</th>
+        <th>Monto</th>
+        <th>Vencimiento</th>
+        <th>Estado</th>
+        <th>Monto Pagado</th>
+        <th>Fecha Pago</th>
+        <th class="text-end">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (c of paginatedItems(); track c.id) {
+        <tr>
+          <td>{{ c.id }}</td>
+          <td>{{ c.polizaId }}</td>
+          <td>{{ c.numeroCuota }}</td>
+          <td>{{ c.monto | number:'1.2-2' }}</td>
+          <td>{{ c.fechaVencimientoCuota }}</td>
+          <td>{{ c.estado }}</td>
+          <td>{{ c.montoPagado ?? '-' }}</td>
+          <td>{{ c.fechaPago ?? '-' }}</td>
+          <td class="text-end">
+            <button type="button" class="btn btn-outline-primary btn-sm" (click)="edit(c)" title="Editar">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="remove(c.id)" title="Eliminar">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button type="button" class="btn btn-outline-secondary btn-sm" (click)="prevPage()" [disabled]="page() === 1" title="Anterior">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <span>Página {{ page() }} de {{ totalPages() }}</span>
+    <button type="button" class="btn btn-outline-secondary btn-sm" (click)="nextPage()" [disabled]="page() === totalPages()" title="Siguiente">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+@if (isModalOpen()) {
+  <div class="modal-backdrop">
+    <app-cuotas-poliza-form
+      [item]="selectedItem()"
+      (saved)="onSaved($event)"
+      (closed)="closeModal()">
+    </app-cuotas-poliza-form>
+  </div>
+}

@@ -1,8 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EstadoPoliza, MonedaPoliza, PeriodicidadPago, Poliza } from './poliza.model';
 import { PolizaService } from './poliza.service';
+import { ClienteService } from '../../../maintenance/pages/clientes/cliente.service';
+import { Cliente } from '../../../maintenance/pages/clientes/cliente.model';
+import { UsuarioService } from '../../../seguridad/pages/usuarios/usuario.service';
+import { Usuario } from '../../../seguridad/pages/usuarios/usuario.model';
+import { InsuranceService } from '../insurance/insurance.service';
+import { InsuranceModel } from '../insurance/insurance.model';
+import { CompaniaSeguroService } from '../../../maintenance/pages/companias-seguro/compania-seguro.service';
+import { CompaniaSeguro } from '../../../maintenance/pages/companias-seguro/compania-seguro.model';
 
 @Component({
   selector: 'app-polizas-form',
@@ -12,7 +20,7 @@ import { PolizaService } from './poliza.service';
   styleUrl: './polizas-form.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PolizasFormComponent implements OnChanges {
+export class PolizasFormComponent implements OnChanges, OnInit {
   @Input() item: Poliza | null = null;
   @Output() saved = new EventEmitter<Poliza>();
   @Output() closed = new EventEmitter<void>();
@@ -38,6 +46,11 @@ export class PolizasFormComponent implements OnChanges {
   };
   errorMessage: string | null = null;
 
+  clientes: Cliente[] = [];
+  usuarios: Usuario[] = [];
+  seguros: InsuranceModel[] = [];
+  companias: CompaniaSeguro[] = [];
+
   readonly periodicidadOptions: { label: string; value: PeriodicidadPago }[] = [
     { label: 'Anual', value: 'anual' },
     { label: 'Mensual', value: 'mensual' }
@@ -55,7 +68,29 @@ export class PolizasFormComponent implements OnChanges {
     { label: 'Renovada', value: 'renovada' }
   ];
 
-  constructor(private polizaService: PolizaService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private polizaService: PolizaService,
+    private clienteService: ClienteService,
+    private usuarioService: UsuarioService,
+    private insuranceService: InsuranceService,
+    private companiaSeguroService: CompaniaSeguroService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.clienteService.obtenerTodos().subscribe({
+      next: (data) => { this.clientes = data; this.cdr.markForCheck(); }
+    });
+    this.usuarioService.obtenerTodos().subscribe({
+      next: (data) => { this.usuarios = data; this.cdr.markForCheck(); }
+    });
+    this.insuranceService.obtenerTodos().subscribe({
+      next: (data) => { this.seguros = data; this.cdr.markForCheck(); }
+    });
+    this.companiaSeguroService.obtenerTodos().subscribe({
+      next: (data) => { this.companias = data; this.cdr.markForCheck(); }
+    });
+  }
 
   ngOnChanges() {
     this.form = this.item

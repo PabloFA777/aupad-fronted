@@ -13,18 +13,39 @@
     </label>
 
     <label>
-      <span>Cliente ID</span>
-      <input type="number" [(ngModel)]="form.clienteId" name="clienteId" required />
+      <span>Cliente</span>
+      <select [(ngModel)]="form.clienteId" name="clienteId" required>
+        @for (c of clientes; track c.id) {
+          <option [value]="c.id">{{ c.nombreRazonSocial }}</option>
+        }
+      </select>
     </label>
 
     <label>
-      <span>Seguro ID</span>
-      <input type="number" [(ngModel)]="form.seguroId" name="seguroId" required />
+      <span>Usuario</span>
+      <select [(ngModel)]="form.usuarioId" name="usuarioId" required>
+        @for (u of usuarios; track u.id) {
+          <option [value]="u.id">{{ u.nombre }} {{ u.apellido }}</option>
+        }
+      </select>
     </label>
 
     <label>
-      <span>Compañía ID</span>
-      <input type="number" [(ngModel)]="form.companiaId" name="companiaId" required />
+      <span>Seguro</span>
+      <select [(ngModel)]="form.seguroId" name="seguroId" required>
+        @for (s of seguros; track s.id) {
+          <option [value]="s.id">{{ s.nombre }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Compañía</span>
+      <select [(ngModel)]="form.companiaId" name="companiaId" required>
+        @for (comp of companias; track comp.id) {
+          <option [value]="comp.id">{{ comp.nombre }}</option>
+        }
+      </select>
     </label>
 
     <label>

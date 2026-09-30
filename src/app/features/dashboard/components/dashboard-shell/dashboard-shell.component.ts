@@ -31,19 +31,19 @@ export class DashboardShellComponent {
     target.classList.add('error');
     target.classList.remove('loaded');
   }
-
   readonly maintenanceItems = [
-    { label: 'Usuarios', path: '/seguridad/usuarios' },
-    { label: 'Roles', path: '/seguridad/roles' },
-    { label: 'Productos', path: '/maintenance/products' },
-    { label: 'Sucursales', path: '/maintenance/branches' },
-    { label: 'Tipos de documento', path: '/maintenance/document-types' }
+  { label: 'Usuarios', path: '/seguridad/usuarios' },
+  { label: 'Roles', path: '/seguridad/roles' },
+  { label: 'Tipos de documento', path: '/maintenance/document-types' },
+  { label: 'Categorías de seguro', path: '/maintenance/categorias-seguro' },
+  { label: 'Compañías de seguro', path: '/maintenance/companias-seguro' },
+  { label: 'Clientes', path: '/maintenance/clientes' }
   ];
 
   readonly quotationItems = [
-    { label: 'Cotizaciones', path: '/quotations/list' },
-    { label: 'Pólizas', path: '/quotations/policies' },
-    { label: 'Reportes', path: '/quotations/reports' }
+  { label: 'Seguros', path: '/quotations/list' },
+  { label: 'Pólizas', path: '/maintenance/polizas' },
+  { label: 'Cuotas de póliza', path: '/maintenance/cuotas-poliza' }
   ];
 
   readonly settingsItems = [
