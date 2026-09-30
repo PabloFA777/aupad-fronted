@@ -1,0 +1,59 @@
+<div class="form-shell">
+  <div class="form-shell__header">
+    <h4>{{ item ? 'Editar documento' : 'Nuevo documento' }}</h4>
+    <button type="button" class="btn-close" (click)="close()" title="Cerrar">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <form class="form-grid" (ngSubmit)="save()">
+    <label>
+      <span>Póliza</span>
+      <select [(ngModel)]="form.polizaId" name="polizaId" required>
+        @for (p of polizas(); track p.id) {
+          <option [ngValue]="p.id">Póliza N° {{ p.numeroPoliza }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Tipo de Documento</span>
+      <select [(ngModel)]="form.tipoDocumentoId" name="tipoDocumentoId" required>
+        @for (td of tiposDocumento(); track td.id) {
+          <option [ngValue]="td.id">{{ td.nombre }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Nombre del Archivo</span>
+      <input type="text" maxlength="255" [(ngModel)]="form.nombreArchivo" name="nombreArchivo" required />
+    </label>
+
+    <label>
+      <span>URL / Enlace del Archivo</span>
+      <input type="text" [(ngModel)]="form.urlArchivo" name="urlArchivo" required placeholder="https://..." />
+    </label>
+
+    <label>
+      <span>Estado</span>
+      <select [(ngModel)]="form.activo" name="activo">
+        <option [ngValue]="true">Activo</option>
+        <option [ngValue]="false">Inactivo</option>
+      </select>
+    </label>
+
+    <div class="form-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()" title="Cancelar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button type="submit" class="btn btn-primary" title="Guardar">
+        <i class="bi bi-check-lg"></i>
+      </button>
+    </div>
+  </form>
+</div>

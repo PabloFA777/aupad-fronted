@@ -1,0 +1,10 @@
+.form-shell { display: flex; flex-direction: column; gap: 16px; padding: 20px; background: #fff; border-radius: 16px; }
+.form-shell__header { display: flex; justify-content: space-between; align-items: center; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-grid label { display: flex; flex-direction: column; gap: 6px; font-size: 0.95rem; }
+.form-grid input, .form-grid select { border: 1px solid #d5dde8; border-radius: 10px; padding: 8px 10px; font-size: 0.95rem; }
+.form-error { grid-column: 1 / -1; color: #dc3545; font-size: 0.875rem; margin-top: -4px; }
+.form-actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+.btn-close { border: 0; background: transparent; font-size: 1.25rem; }
+.form-shell__header h4 { color: #1a2233; margin: 0; }
+.form-grid label span { color: #4a5568; }

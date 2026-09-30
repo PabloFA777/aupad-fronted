@@ -1,0 +1,71 @@
+<div class="form-shell">
+  <div class="form-shell__header">
+    <h4>{{ item ? 'Editar beneficiario' : 'Nuevo beneficiario' }}</h4>
+    <button type="button" class="btn-close" (click)="close()" title="Cerrar">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <form class="form-grid" (ngSubmit)="save()">
+    <label>
+      <span>Póliza</span>
+      <select [(ngModel)]="form.polizaId" name="polizaId" required>
+        @for (p of polizas(); track p.id) {
+          <option [ngValue]="p.id">Póliza N° {{ p.numeroPoliza }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>DNI</span>
+      <input type="text" maxlength="15" [(ngModel)]="form.dni" name="dni" required />
+    </label>
+
+    <label>
+      <span>Nombres completos</span>
+      <input type="text" maxlength="150" [(ngModel)]="form.nombres" name="nombres" required />
+    </label>
+
+    <label>
+      <span>Cargo</span>
+      <input type="text" maxlength="100" [(ngModel)]="form.cargo" name="cargo" />
+    </label>
+
+    <label>
+      <span>Remuneración</span>
+      <input type="number" step="0.01" [(ngModel)]="form.remuneracion" name="remuneracion" />
+    </label>
+
+    <label>
+      <span>Mes</span>
+      <input type="number" min="1" max="12" [(ngModel)]="form.mes" name="mes" required />
+    </label>
+
+    <label>
+      <span>Año</span>
+      <input type="number" [(ngModel)]="form.anio" name="anio" required />
+    </label>
+
+    <label>
+      <span>Estado</span>
+      <select [(ngModel)]="form.estado" name="estado">
+        @for (opt of estadoOptions; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </label>
+
+    <div class="form-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()" title="Cancelar">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button type="submit" class="btn btn-primary" title="Guardar">
+        <i class="bi bi-check-lg"></i>
+      </button>
+    </div>
+  </form>
+</div>
