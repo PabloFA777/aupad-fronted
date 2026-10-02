@@ -20,7 +20,7 @@ export class CuotasPolizaFormComponent implements OnChanges, OnInit {
   @Output() closed = new EventEmitter<void>();
 
   form: Partial<CuotaPoliza> = {
-    polizaId: 0,
+    polizaId: undefined,
     numeroCuota: 1,
     monto: 0,
     fechaVencimientoCuota: new Date().toISOString().substring(0, 10),
@@ -63,7 +63,7 @@ export class CuotasPolizaFormComponent implements OnChanges, OnInit {
     this.form = this.item
       ? { ...this.item }
       : {
-          polizaId: 0,
+          polizaId: undefined,
           numeroCuota: 1,
           monto: 0,
           fechaVencimientoCuota: new Date().toISOString().substring(0, 10),

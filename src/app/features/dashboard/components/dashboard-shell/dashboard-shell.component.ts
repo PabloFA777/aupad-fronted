@@ -43,7 +43,10 @@ export class DashboardShellComponent {
   readonly quotationItems = [
   { label: 'Seguros', path: '/quotations/list' },
   { label: 'Pólizas', path: '/maintenance/polizas' },
-  { label: 'Cuotas de póliza', path: '/maintenance/cuotas-poliza' }
+  { label: 'Cuotas de póliza', path: '/maintenance/cuotas-poliza' },
+  { label: 'Beneficiarios', path: '/maintenance/beneficiarios-poliza' },
+  { label: 'Documentos de póliza', path: '/maintenance/documentos-poliza' }
+  
   ];
 
   readonly settingsItems = [

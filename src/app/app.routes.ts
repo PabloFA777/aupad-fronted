@@ -14,6 +14,8 @@ import { CompaniasSeguroListComponent } from './features/maintenance/pages/compa
 import { ClientesListComponent } from './features/maintenance/pages/clientes/clientes-list.component';
 import { PolizasListComponent } from './features/quotations/pages/polizas/polizas-list.component';
 import { CuotasPolizasListComponent } from './features/quotations/pages/cuotas-poliza/cuotas-poliza-list.component';
+import { BeneficiariosPolizasListComponent } from './features/quotations/pages/beneficiarios-poliza/beneficiarios-poliza-list.component';
+import { DocumentosPolizasListComponent } from './features/quotations/pages/documentos-poliza/documentos-poliza-list.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -36,7 +38,9 @@ export const routes: Routes = [
       { path: 'settings/system-config', component: SystemConfigListComponent },
       { path: 'quotations', component: InsuranceListComponent },
       { path: 'quotations/list', component: InsuranceListComponent },
-      
+      { path: 'maintenance/cuotas-poliza', component: CuotasPolizasListComponent },
+      { path: 'maintenance/beneficiarios-poliza', component: BeneficiariosPolizasListComponent },
+      { path: 'maintenance/documentos-poliza', component: DocumentosPolizasListComponent },
     ]
   },
   { path: '**', redirectTo: 'login' }

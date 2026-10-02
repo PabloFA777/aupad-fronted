@@ -10,8 +10,9 @@
     <label>
       <span>Póliza</span>
       <select [(ngModel)]="form.polizaId" name="polizaId" required>
+        <option [ngValue]="undefined" disabled>-- Selecciona --</option>
         @for (p of polizas; track p.id) {
-          <option [value]="p.id">{{ p.numeroPoliza }}</option>
+          <option [ngValue]="p.id">{{ p.numeroPoliza }}</option>
         }
       </select>
     </label>
@@ -53,7 +54,7 @@
     <label>
       <span>Método Pago</span>
       <select [(ngModel)]="form.metodoPago" name="metodoPago">
-        <option [value]="null">-- Ninguno --</option>
+        <option [ngValue]="null">-- Ninguno --</option>
         @for (opt of metodoPagoOptions; track opt.value) {
           <option [value]="opt.value">{{ opt.label }}</option>
         }

@@ -60,10 +60,12 @@
 
 @if (isModalOpen()) {
   <div class="modal-backdrop">
-    <app-cuotas-poliza-form
-      [item]="selectedItem()"
-      (saved)="onSaved($event)"
-      (closed)="closeModal()">
-    </app-cuotas-poliza-form>
+    <div class="modal-card">
+      <app-cuotas-poliza-form
+        [item]="selectedItem()"
+        (saved)="onSaved($event)"
+        (closed)="closeModal()">
+      </app-cuotas-poliza-form>
+    </div>
   </div>
 }

@@ -44,3 +44,5 @@
   justify-content: center;
   z-index: 1000;
 }
+
+.modal-card { width: min(720px, 92vw); }
